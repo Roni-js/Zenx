@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <script>
+      (function() {
+        try {
+          var originalFetch = window.fetch;
+          var currentFetch = typeof originalFetch === 'function' ? originalFetch.bind(window) : originalFetch;
+          
+          Object.defineProperty(window, 'fetch', {
+            get: function() {
+              return currentFetch;
+            },
+            set: function(val) {
+              currentFetch = val;
+            },
+            configurable: true,
+            enumerable: true
+          });
+
+          if (typeof Window !== 'undefined' && Window.prototype) {
+            try {
+              var protoDesc = Object.getOwnPropertyDescriptor(Window.prototype, 'fetch');
+              if (protoDesc && !protoDesc.set && protoDesc.configurable) {
+                Object.defineProperty(Window.prototype, 'fetch', {
+                  get: function() {
+                    return currentFetch;
+                  },
+                  set: function(val) {
+                    currentFetch = val;
+                  },
+                  configurable: true,
+                  enumerable: true
+                });
+              }
+            } catch (_) {}
+          }
+        } catch (_) {}
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZenX Web Solutions | Modern Websites Built to Grow Your Business</title>
+    <meta name="description" content="ZenX Web Solutions creates fast, responsive, and professional websites for startups, small businesses, and entrepreneurs worldwide." />
+    <meta property="og:title" content="ZenX Web Solutions | Modern Websites Built to Grow Your Business" />
+    <meta property="og:description" content="ZenX Web Solutions creates fast, responsive, and professional websites for startups, small businesses, and entrepreneurs worldwide." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#4F46E5" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body class="bg-white text-[#374151] antialiased selection:bg-[#4F46E5]/15 selection:text-[#4F46E5]">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
